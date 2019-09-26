@@ -103,18 +103,7 @@ static NSString *const CHANNEL_NAME = @"flutter_webview_plugin";
     }
 
     if (clearCookies != (id)[NSNull null] && [clearCookies boolValue]) {
-        if (@available(iOS 9.0, *)) {
-            NSSet *websiteDataTypes
-            = [NSSet setWithArray:@[
-                                    WKWebsiteDataTypeCookies,
-                                    ]];
-            NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-            
-            [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
-            }];
-        } else {
-            // Fallback on earlier versions
-        }
+	[self cleanCookies];
     }
 
     if (userAgent != (id)[NSNull null]) {
